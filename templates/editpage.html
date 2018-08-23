@@ -1,0 +1,50 @@
+{% include "header.html" %}
+{% include "nav.html" %}
+<body>
+
+<div id="LOGIN">
+            <form name="formUserUpdate" action="/update" onsubmit="return confirmForm()" method="post">
+
+            <p><h5><input type="text" maxlength="50" name="USERNAME" value="{{ USEREDIT.email }}"></h5>
+                <p><h5><input type="password" maxlength="25" name="PASSWORD" value="{{ USEREDIT.password }}"></h5>
+                <p><h5><input type="text" maxlength="50" name="TOWN" value="{{ USEREDIT.town }}"></h5>
+                <p><h5><input type="text" maxlength="50" name="COUNTRY" value="{{ USEREDIT.country }}"></h5>
+                <p><h5><input type="text" maxlength="50" name="POSTCODE" value="{{ USEREDIT.postcode }}"></h5>
+                <p><h5><input type="submit" value="update"></h5>
+
+
+    </form>
+            <div id="ERROR"><p><h5>{{ ERROR }}</h5></div>
+
+</div>
+</body>
+{% include "footer.html" %}
+<script>
+    function confirmForm() {
+        var nameVer = document.forms["formUserUpdate"]["USERNAME"].value;
+        if (nameVer == "") {
+            alert("Name must be filled out");
+            return false;
+            }
+        var passVer = document.forms["formUserUpdate"]["PASSWORD"].value;
+        if (passVer == "") {
+            alert("Password must be filled out");
+            return false;
+            }
+        var townVer = document.forms["formUserUpdate"]["TOWN"].value;
+        if (townVer == "") {
+            alert("Town must be filled out");
+            return false;
+            }
+        var countryVer = document.forms["formUserUpdate"]["COUNTRY"].value;
+        if (countryVer == "") {
+            alert("Country must be filled out");
+            return false;
+            }
+        var postVer = document.forms["formUserUpdate"]["POSTCODE"].value;
+        if (postVer == "") {
+            alert("Postcode must be filled out");
+            return false;
+            }
+    }
+</script>

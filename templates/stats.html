@@ -1,0 +1,268 @@
+{% include "header.html" %}
+    {% if current_user.is_authenticated %}
+        {% include "nav.html" %}
+    {% endif %}
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<script type=text/javascript>$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+    <script src='static/js/Chart.min.js'></script>
+
+
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+    li1 {float: left;}
+
+    w3-container3 {float: left; width: 30%;}
+
+</style>
+</head>
+
+
+<body>
+<div class="w3-container">
+
+         <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+        <h5 class="w3-text-black w3-padding-16"><i
+                class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-black"></i>
+            <b id="update6">Patient Breakdown
+        </b></H5>
+        <H1>STATS</H1>
+        <ul>
+            <li>The number of registered users is {{ RECORDCOUNT }}</li>
+            <li>The number of Male users is {{ MALECOUNT }}</li>
+            <li>The number of Female users is {{ FEMALECOUNT }}</li>
+            <li>The number of users in height range 150 - 159 is {{ HEIGHTA }}</li>
+            <li>The number of users in height range 160 - 169 is {{ HEIGHTB }}</li>
+            <li>The number of users in height range 170 - 179 is {{ HEIGHTC }}</li>
+            <li>The number of users in height range 180 - 189 is {{ HEIGHTD }}</li>
+            <li>The number of users in height range 190+ is {{ HEIGHTE }}</li>
+            <li>The global breakdown is:</li>
+            <ul>
+                <li>UK = {{ UK }}</li>
+                <li>AUSTRALIA = {{ AUSTRALIA }}</li>
+                <li>USA = {{ USA }}</li>
+                <li>CANADA = {{ CANADA }}</li>
+                <li>IRELAND = {{ IRELAND }}</li>
+            </ul>
+        </ul>
+                 <h1>HHD Sufferers Gender Chart</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChart" ></canvas>
+    <p id="caption1">The chart is displaying a bar chart of gender breakdown.</p>
+
+    <script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Female", "Male"],
+        datasets: [{
+            label: '# Sufferers by Gender',
+            data: [{{ FEMALECOUNT }}, {{ MALECOUNT }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+             <h1>HHD Sufferers Country Chart</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChartCountry" ></canvas>
+    <p id="caption2">The chart is displaying a bar chart of country breakdown.</p>
+
+    <script>
+var ctx = document.getElementById("myChartCountry").getContext('2d');
+var myChartCountry = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Uk", "Australia", "Usa", "Canada", "Ireland"],
+        datasets: [{
+            label: '# Sufferers by Country',
+            data: [{{ UK }}, {{ AUSTRALIA }}, {{ USA }}, {{ CANADA }}, {{ IRELAND }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+             <h1>HHD Sufferers Height Chart</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChartHeight" ></canvas>
+    <p id="caption3">The chart is displaying a bar chart of height breakdown.</p>
+
+    <script>
+var ctx = document.getElementById("myChartHeight").getContext('2d');
+var myChartHeight = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["150-159", "160-169", "170-179", "180-189", "190 +"],
+        datasets: [{
+            label: '# Sufferers by Height',
+            data: [{{ HEIGHTA }}, {{ HEIGHTB }}, {{ HEIGHTC }}, {{ HEIGHTD }}, {{ HEIGHTE }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+                          <h1>HHD Sufferers Age Chart</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChartAge" ></canvas>
+    <p id="caption4">The chart is displaying a bar chart of age breakdown.</p>
+
+    <script>
+var ctx = document.getElementById("myChartAge").getContext('2d');
+var myChartAge = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["1-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99"],
+        datasets: [{
+            label: '# Sufferers by Age',
+            data: [{{ AGEA }}, {{ AGEB }}, {{ AGEC }}, {{ AGED }}, {{ AGEE }}, {{ AGEF }}, {{ AGEG }}, {{ AGEH }}, {{ AGEI }}, {{ AGEJ }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+                                       <h1>HHD Sufferers Weight Chart</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChartWeight" ></canvas>
+    <p id="caption5">The chart is displaying a bar chart of weight breakdown.</p>
+
+    <script>
+var ctx = document.getElementById("myChartWeight").getContext('2d');
+var myChartWeight = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99", "100-109"],
+        datasets: [{
+            label: '# Sufferers by Weight',
+            data: [{{ WEIGHTA }}, {{ WEIGHTB }}, {{ WEIGHTC }}, {{ WEIGHTD }}, {{ WEIGHTE }}, {{ WEIGHTF }}, {{ WEIGHTG }}, {{ WEIGHTH }}, {{ WEIGHTI }}, {{ WEIGHTJ }}],
+            backgroundColor:
+                'rgba(255, 99, 132, 1)',
+            borderColor:
+                'rgba(255,99,132,1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+</div>
+</div>
+</body>
+{% include "footer.html" %}

@@ -1,0 +1,107 @@
+{%include "header.html"%}
+{% include "nav.html" %}
+
+<form action="/submituser" method="post" xmlns="http://www.w3.org/1999/html">
+
+    <div id="NEW-USER">
+    <ul >
+
+      <li>
+        <li>email/username: <input type="text" maxlength="50" name="EMAIL"></li>
+
+        <li>Firstname: <input type="text" maxlength="25" name="FIRSTNAME"></li>
+
+        <li>Surname: <input type="text" maxlength="25" name="SURNAME"></li>
+
+        <li>Password: <input type="password" maxlength="25" name="PASSWORD"></li>
+
+        <li>Age: <input type="number" maxlength="3" name="AGE"></li>
+
+        <li>Gender:
+            <ul>
+                <li>
+                    <input type="radio" name="GENDER" value="MALE">Male<br>
+                </li>
+                <li>
+                    <input type="radio" name="GENDER" value="FEMALE">Female<br>
+                </li>
+            </ul>
+        </li>
+
+        <li>Town: <input type="text" name="TOWN"></li>
+
+        <li>Country: <select name="COUNTRY">
+            <option>Australia</option>
+            <option>UK</option>
+            <option>NZ</option>
+            <option>France</option>
+            <option>Spain</option>
+            <option>Holland</option>
+        </select></li>
+
+        <li>Postcode: <input type="text" name="POSTCODE"></li>
+
+        <li>Height: <input type="text" name="HEIGHT"></li>
+
+        <li>Weight: <input type="text" name="WEIGHT"></li>
+
+        <li>Race: <input type="text" name="RACE"></li>
+
+        <li>Children: <input type="text" name="CHILDREN"></li>
+
+        <li>Officially Diagnosed: <input type="text" name="DIAGNOSED"></li>
+
+        <li>Age when first appeared: <input type="text" name="AGESTARTED"></li>
+
+        <li>Do your parents have HHD: <input type="text" name="PARENTSHHD"></li>
+
+        <li>Number of Siblings: <input type="text" name="NUMBERSIBLINGS"></li>
+
+        <li>Number of Siblings with HHD: <input type="text" name="SIBLINGSWITHHHD"></li>
+
+        <li>Location of HHD: <input type="text" name="HHDLOCATION"></li>
+
+        <li>Doctor treating your HHD: <input type="text" name="DOCTOR"></li>
+
+        <li>Dermatologist treating HHD: <input type="text" name="DERMO"></li>
+
+        <li>Medication Tried: <input type="text" name="MEDICATIONTRIED"></li>
+
+        <li>Medication Working: <input type="text" name="MEDICATIONWORKING"></li>
+
+        <li>Tea: <input type="text" name="TEA"></li>
+
+        <li>Coffee: <input type="text" name="COFFEE"></li>
+
+        <li>Botox: <input type="text" name="BOTOX"></li>
+
+        <li>Magnesium: <input type="text" name="MAG"></li>
+
+        <li>Vitd3: <input type="text" name="VITD3"></li>
+
+        <li>Vitc: <input type="text" name="VITC"></li>
+
+        <li>VitK: <input type="text" name="VITK"></li>
+
+        <li>Probiotic: <input type="text" name="PROBIOTIC"></li>
+
+        <li>Area affected: <input type="text" name="AREA"></li>
+
+        <li>Length of breakouts: <input type="text" name="LENGTH"></li>
+
+        <li>Redlight: <input type="text" name="RED"></li>
+
+        <li>Cream: <input type="text" name="CREAM"></li>
+
+        <li>Antibiotic: <input type="text" name="ANTIBIOTIC"></li>
+
+        <li>Other Medical: <input type="text" name="OTHERMED"></li>
+
+        <input type="submit" value="Create User">
+
+        </ul>
+    </div>
+</form>
+
+{%include "footer.html"%}
+
