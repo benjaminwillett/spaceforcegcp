@@ -472,23 +472,24 @@
 
 [id="ADMIN-DELETE"] {
     width: 10%;
-    display: inline-block;
-    color: white;
+    display: inline;
+    color: red;
     font-size: small;
     margin: auto;
     border: none;
 }
 
 [id="DELETE-FORM"] {
+    float: left;
     width: 25%;
-    display: inline-block;
+    display: inline;
     font-size: small;
     margin: auto;
     border: none;
 }
 
 [id="DELETE-FORM"] lu{
-    display: inline-block;
+    display: inline;
     font-size: large;
     color: red;
     font-weight: bold;
@@ -499,7 +500,7 @@
 }
 
 [id="DELETE-FORM"] li{
-    display: inline-block;
+    display: inline;
     font-size: large;
     color: red;
     font-weight: bold;

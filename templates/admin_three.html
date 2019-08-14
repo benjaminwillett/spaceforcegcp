@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V04</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/static/assets_two/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/assets_two/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Select</th>
+									<th class="cell100 column2">Email</th>
+									<th class="cell100 column3">Name</th>
+									<th class="cell100 column4">Address</th>
+									<th class="cell100 column5">Role</th>
+									<th class="cell100 column6">Action</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+							{% for each in USERS %}
+								<tr class="row100 body">
+									<td class="cell100 column1"><input type="checkbox" class="checkbox" /></td>
+									<td class="cell100 column2">- {{ each.email }}</td>
+									<td class="cell100 column3">- {{ each.firstName }} {{ each.surname }}</td>
+									<td class="cell100 column4">- {{ each.town }} {{ each.country }} {{ each.postcode }}</td>
+									<td class="cell100 column5"> {% if each.role == "ADMIN" %}
+                                    <div class="msg msg-ok"><p><strong></strong></p></div> </td>
+                                        {% endif %}
+									<td class="cell100 column6">
+                                    	<div class="buttons">
+                                            <form name="userUpdate" action="/userupdate" method="POST">
+
+                  <input type="hidden" name="EDIT" value="{{ each.email }}" />
+							<input type="submit" class="button" value="Edit" />
+                                                </form>
+
+
+
+                                            <form name="deleteAdmin" action="/deleteadmin" onsubmit="return confirmForm()" method="POST">
+
+                  <input type="hidden" name="DELETE" value="{{ each.email }}" />
+							<input type="submit" class="button" value="Delete" />
+                                                </form>
+						</div></td>
+                                </tr>
+
+                            {% endfor %}
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->	
+	<script src="/static/assets_two/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/assets_two/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/assets_two/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/assets_two/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/assets_two/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="/static/assets_two/js/main.js"></script>
+	<script>
+		function confirmForm() {
+			return confirm("Warning this will delete the user permanently")
+		}
+	</script>
+</body>
+</html>
