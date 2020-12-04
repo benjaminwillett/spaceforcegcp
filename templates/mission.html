@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is the Mission.HTML page title</title>
+</head>
+<body>
+<div id="nav">
+    <p></p>
+    <p>This is the body of the Mission.HTML page</p>
+    <p>Welcome to the Kids Spy Network. Make your way through the clues and try to work out who the Street Sign
+        Switcher is!</p>
+
+    <p>We're waiting for an update from Agent Mountain Lion at any moment. You will need an access code from your
+    missions
+    to see it. When you have worked it out, enter the code to see our next message.  </p>
+
+<div align="left">
+            <h3>Clue1</h3>
+
+            <p>So, how many cats did you manage to spot?</p> <input id="cats" value="enter number here" onfocus="this.value='';" />
+            <button onclick="valFunction () ">Submit Answer!</button>
+
+
+        </div>
+<div id="nav" align="centre">
+    <div id="clue1" style="display:none;">
+        <iframe src="https://player.vimeo.com/video/60224848" width="640" height="480" frameborder="0"
+              allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+</div>
+<p></p>
+    <p>Could You See The Video?</p>
+
+<p>Great work. That means you had the right information. How are you going with the rest of the clues?</p>
+​
+<p>When you have figured out all the information, use the form below to let the agency know what you have
+    discovered!</p>
+
+<p>Enter the password for the next clue!</p>
+
+<div align="left">
+            <h3>Clue2</h3>
+
+            <p>So, how many cats did you manage to spot?</p> <input id="cats2" value="enter number here"
+                                                                    onfocus="this.value='';" />
+            <button onclick="valFunction2 () ">Submit Answer!</button>
+
+
+        </div>
+<div id="nav">
+        <div id="clue2" style="display:none;">
+            <iframe src="https://player.vimeo.com/video/60224849" width="640" height="480" frameborder="0"
+         allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+<p></p>
+    <p>Who is the Street Sign Switcher? Enter the number of the Mischief Maker below to let the agency know who to look for!</p>
+</div>
+</body>
+</html>
+
+            <script type="text/javascript">
+            function valFunction()
+                {
+                cats=document.getElementById("cats").value;
+                if(cats==7) {
+
+            document.getElementById("clue1").style.display = 'inline';
+        }
+        else
+        {
+            document.getElementById("clue1").style.display = 'none';
+        }
+                }
+            </script>
+
+ <script type="text/javascript">
+            function valFunction2()
+                {
+                cats2=document.getElementById("cats2").value;
+                if(cats2==8) {
+
+            document.getElementById("clue2").style.display = 'inline';
+        }
+        else
+        {
+            document.getElementById("clue2").style.display = 'none';
+        }
+                }
+            </script>

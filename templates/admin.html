@@ -1,12 +1,13 @@
 {% include "header.html" %}
 {% include "nav.html" %}
 
+{% if current_user.role == "ADMIN" %}
 <div id="header">
     <p><h3>Admin Console</h3>
     <p><h5>Here you can change user password, and enable/disable users</h5>
         <p><h5>Record count = {{ RECORDCOUNT }}</h5>
     <form action="/adminsearch" method="POST">
-    <p><h5>Search for username here
+    <p><h5>Search for user here
     <input type="text" maxlength="50" placeholder="Search" name="USERSEARCH">
         <button type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         </button>
@@ -67,7 +68,12 @@
 </div>
 
 {%include "footer.html"%}
+{% endif %}
 
+{% if current_user.role == "USER" %}
+{%include "mission.html"%}
+{% endif %}
+</div>
 <script>
     function confirmForm() {
         return confirm("Warning this will delete the user permanently")

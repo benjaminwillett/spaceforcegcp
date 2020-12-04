@@ -17,7 +17,6 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
-import pdb
 
 print("loading global variables!!")
 time.sleep(1)
@@ -182,7 +181,7 @@ def default():
     global error
     error = ""
     form = LoginForm()
-    return render_template('index_two.html', ERROR=error, form=form)
+    return render_template('index_two3.html', ERROR=error, form=form)
 
 
 @csrf.exempt
@@ -241,21 +240,6 @@ def admin():
         recordcount = db.session.query(Users.email).count()
         print(current_user)
         return render_template('admin.html', USERS=p, RECORDCOUNT=recordcount)
-
-    else:
-        return redirect(url_for('default'))
-
-
-@csrf.exempt
-@app.route('/admin_two', methods=['GET', 'POST'])
-def admin_two():
-    if current_user.is_authenticated:
-        global db
-        print("/admin")
-        p = Users.query.order_by(Users.email).all()
-        recordcount = db.session.query(Users.email).count()
-        print(current_user)
-        return render_template('admin_three.html', USERS=p, RECORDCOUNT=recordcount)
 
     else:
         return redirect(url_for('default'))
@@ -378,32 +362,6 @@ def submituser():
     postcode = request.form['POSTCODE']
     height = request.form['HEIGHT']
     weight = request.form['WEIGHT']
-    # race = request.form['RACE']
-    # children = request.form['CHILDREN']
-    # diagnosed = request.form['DIAGNOSED']
-    # agestarted = request.form['AGESTARTED']
-    # parentshhd = request.form['PARENTSHHD']
-    # numbersiblings = request.form['NUMBERSIBLINGS']
-    # siblingswithhhd = request.form['SIBLINGSWITHHHD']
-    # hhdlocation = request.form['HHDLOCATION']
-    # doctor = request.form['DOCTOR']
-    # dermo = request.form['DERMO']
-    # medicationtried = request.form['MEDICATIONTRIED']
-    # medicationworking = request.form['MEDICATIONWORKING']
-    # tea = request.form['TEA']
-    # coffee = request.form['COFFEE']
-    # botox = request.form['BOTOX']
-    # magnesium = request.form['MAG']
-    # vitd3 = request.form['VITD3']
-    # vitk = request.form['VITK']
-    # vitc = request.form['VITC']
-    # probiotic = request.form['PROBIOTIC']
-    # area = request.form['AREA']
-    # length = request.form['LENGTH']
-    # red = request.form['RED']
-    # cream = request.form['CREAM']
-    # antibiotic = request.form['ANTIBIOTIC']
-    # othermed = request.form['OTHERMED']
     role = "USER"
     status = "inactive"
     print("Form variables populated")

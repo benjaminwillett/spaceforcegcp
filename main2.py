@@ -17,7 +17,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import pdb
 
 print("loading global variables!!")
 time.sleep(1)
@@ -25,7 +25,7 @@ time.sleep(1)
 
 print("********************************************************")
 print("********************************************************")
-print("**        Rare Disease Data Capture tool              **")
+print("**        page for SpaceForceMissions.com             **")
 print("**  ************************************************  **")
 print("**  ************************************************  **")
 print("**  ************************************************  **")
@@ -42,7 +42,7 @@ lm = LoginManager(app)
 csrf = CsrfProtect()
 csrf.init_app(app)
 
-app.config['SECRET_KEY'] = 'SkiCity3192!'
+app.config['SECRET_KEY'] = 'asdlk#^@j234987324kjsdf!%@$'
 app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
 
 
@@ -100,6 +100,8 @@ class Users(db.Model, UserMixin):
     cream = db.Column(db.String(64), unique=True)
     antibiotic = db.Column(db.String(64), unique=True)
     other_medical = db.Column(db.String(64), unique=True)
+    role = db.Column(db.String(64), unique=True)
+    status = db.Column(db.String(64), unique=True)
     print("New User done")
 
     def set_password(self, password):
@@ -202,19 +204,22 @@ def login():
 
     if form.validate_on_submit():
         print("validate_on_submit activated")
-        print(form.email.data)
-        print(current_user)
         user = Users.query.filter_by(email=form.email.data).first()
-        print(user.email)
+        print("%s is attempting to login" % user.email)
+
         if user is None:
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
-        print(user.email)
-        login_user(user)
-        flash('You are now logged in!')
 
-        return redirect(url_for('admin'))
-    return redirect(url_for('login'))
+        if user.status == "inactive":
+            print("%s is an INACTIVE ACCOUNT" % user.email)
+            redirect(url_for('default'))
+        else:
+            login_user(user)
+            flash('You are now logged in!')
+            return redirect(url_for('admin'))
+
+    return redirect(url_for('default'))
 
 
 @csrf.exempt
@@ -236,6 +241,21 @@ def admin():
         recordcount = db.session.query(Users.email).count()
         print(current_user)
         return render_template('admin.html', USERS=p, RECORDCOUNT=recordcount)
+
+    else:
+        return redirect(url_for('default'))
+
+
+@csrf.exempt
+@app.route('/admin_two', methods=['GET', 'POST'])
+def admin_two():
+    if current_user.is_authenticated:
+        global db
+        print("/admin")
+        p = Users.query.order_by(Users.email).all()
+        recordcount = db.session.query(Users.email).count()
+        print(current_user)
+        return render_template('admin_three.html', USERS=p, RECORDCOUNT=recordcount)
 
     else:
         return redirect(url_for('default'))
@@ -357,7 +377,7 @@ def submituser():
     country = request.form['COUNTRY']
     postcode = request.form['POSTCODE']
     height = request.form['HEIGHT']
-    # weight = request.form['WEIGHT']
+    weight = request.form['WEIGHT']
     # race = request.form['RACE']
     # children = request.form['CHILDREN']
     # diagnosed = request.form['DIAGNOSED']
@@ -384,11 +404,13 @@ def submituser():
     # cream = request.form['CREAM']
     # antibiotic = request.form['ANTIBIOTIC']
     # othermed = request.form['OTHERMED']
+    role = "USER"
+    status = "inactive"
     print("Form variables populated")
 
     u = Users(email=email, firstname=firstName, surname=surname, password=password, age=age, gender=gender, town=town,
-              country=country, postcode=postcode, height=height)
-    #           weight=weight, race=race, children=children, official_diag=diagnosed, age_first_hhd=agestarted,
+              country=country, postcode=postcode, height=height, weight=weight, role=role, status=status)
+    #           , race=race, children=children, official_diag=diagnosed, age_first_hhd=agestarted,
     #           parent_hhd=parentshhd, number_of_siblings=numbersiblings,
     #           number_of_siblings_hhd=siblingswithhhd, location_hhd=hhdlocation, doctor_hhd=doctor,
     #           dermatologist=dermo, medication_tried=medicationtried, medication_working=medicationworking,
@@ -458,52 +480,39 @@ def stats():
     p = Users.query.all()
 
     recordcount = db.session.query(Users.email).count()
-    malecount = db.session.query(Users.gender).filter_by(gender="Male").count()
-    femalecount = db.session.query(Users.gender).filter_by(gender="Female").count()
-    uk = db.session.query(Users.country).filter_by(country="UK").count()
-    australia = db.session.query(Users.country).filter_by(country="Australia").count()
-    usa = db.session.query(Users.country).filter_by(country="USA").count()
-    canada = db.session.query(Users.country).filter_by(country="CANADA").count()
-    ireland = db.session.query(Users.country).filter_by(country="Ireland",).count()
 
-    heighta = db.session.query(Users).filter(Users.height.in_(range(150, 159))).count()
-    heightb = db.session.query(Users).filter(Users.height.in_(range(160, 169))).count()
-    heightc = db.session.query(Users).filter(Users.height.in_(range(170, 179))).count()
-    heightd = db.session.query(Users).filter(Users.height.in_(range(180, 189))).count()
-    heighte = db.session.query(Users).filter(Users.height >= 190).count()
+    gender_count = db.session.query(Users.gender, db.func.count()).group_by(Users.gender).all()
 
-    agea = db.session.query(Users).filter(Users.age.in_(range(1, 9))).count()
-    ageb = db.session.query(Users).filter(Users.age.in_(range(10, 19))).count()
-    agec = db.session.query(Users).filter(Users.age.in_(range(20, 29))).count()
-    aged = db.session.query(Users).filter(Users.age.in_(range(30, 39))).count()
-    agee = db.session.query(Users).filter(Users.age.in_(range(40, 49))).count()
-    agef = db.session.query(Users).filter(Users.age.in_(range(50, 59))).count()
-    ageg = db.session.query(Users).filter(Users.age.in_(range(60, 69))).count()
-    ageh = db.session.query(Users).filter(Users.age.in_(range(70, 79))).count()
-    agei = db.session.query(Users).filter(Users.age.in_(range(80, 89))).count()
-    agej = db.session.query(Users).filter(Users.age.in_(range(90, 99))).count()
+    for gender, count in gender_count:
+        print(gender, count)
 
-    weighta = db.session.query(Users).filter(Users.weight.in_(range(10, 19))).count()
-    weightb = db.session.query(Users).filter(Users.weight.in_(range(20, 29))).count()
-    weightc = db.session.query(Users).filter(Users.weight.in_(range(30, 39))).count()
-    weightd = db.session.query(Users).filter(Users.weight.in_(range(40, 49))).count()
-    weighte = db.session.query(Users).filter(Users.weight.in_(range(50, 59))).count()
-    weightf = db.session.query(Users).filter(Users.weight.in_(range(60, 69))).count()
-    weightg = db.session.query(Users).filter(Users.weight.in_(range(70, 79))).count()
-    weighth = db.session.query(Users).filter(Users.weight.in_(range(80, 89))).count()
-    weighti = db.session.query(Users).filter(Users.weight.in_(range(90, 99))).count()
-    weightj = db.session.query(Users).filter(Users.weight.in_(range(100, 109))).count()
+    country_count = db.session.query(Users.country, db.func.count()).group_by(Users.country).all()
 
-    return render_template("stats.html", USERS=p, USERNAME=current_user, RECORDCOUNT=recordcount, MALECOUNT=malecount,
-                               FEMALECOUNT=femalecount, UK=uk, AUSTRALIA=australia, USA=usa, CANADA=canada,
-                               IRELAND=ireland, HEIGHTA=heighta, HEIGHTB=heightb, HEIGHTC=heightc, HEIGHTD=heightd,
-                               HEIGHTE=heighte, AGEA=agea, AGEB=ageb, AGEC=agec, AGED=aged, AGEE=agee, AGEF=agef,
-                               AGEG=ageg, AGEH=ageh, AGEI=agei, AGEJ=agej, WEIGHTA=weighta, WEIGHTB=weightb,
-                               WEIGHTC=weightc, WEIGHTD=weightd, WEIGHTE=weighte, WEIGHTF=weightf, WEIGHTG=weightg,
-                               WEIGHTH=weighth, WEIGHTI=weighti, WEIGHTJ=weightj)
+    for country, count in country_count:
+        print(country, count)
+
+    height_count = db.session.query(Users.height, db.func.count()).group_by(Users.height).all()
+
+    for height, count in height_count:
+        print(height, count)
+
+    age_count = db.session.query(Users.age, db.func.count()).group_by(Users.age).all()
+
+    for age, count in age_count:
+        print(age, count)
+
+    weight_count = db.session.query(Users.weight, db.func.count()).group_by(Users.weight).all()
+
+    for weight, count in weight_count:
+        print(weight, count)
+
+    return render_template("stats.html", USERS=p, USERNAME=current_user, RECORDCOUNT=recordcount,
+                           GENDER_COUNT=gender_count, HEIGHT_COUNT=height_count, AGE_COUNT=age_count,
+                           WEIGHT_COUNT=weight_count,
+                           COUNTRY_COUNT=country_count)
 
 
 if __name__ == '__main__':
     manager.run()
-    port = int(os.environ.get('PORT', 33507))
-    app.run(debug=True, port=port)
+    port = int(os.environ.get('PORT', 80))
+    app.run(host='0.0.0.0', debug=True, port=port)
