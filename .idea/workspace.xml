@@ -129,7 +129,7 @@
         <entry file="file://$PROJECT_DIR$/templates/index_two3.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.7132867">
-              <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+              <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -1330,7 +1330,7 @@
     <entry file="file://$PROJECT_DIR$/templates/index_two3.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7132867">
-          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
           <folding />
         </state>
       </provider>
