@@ -1,6 +1,7 @@
 from main import app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy(app)
 
@@ -60,3 +61,12 @@ class Users(db.Model, UserMixin):
     def __repr__(self):
         print("returned result")
         return '<Users %r>' % self.email
+
+
+admin = Users('admin', 'admin@example.com')
+
+db.create_all()
+
+db.session.add(admin)
+
+db.session.commit()

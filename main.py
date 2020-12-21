@@ -47,12 +47,15 @@ sys.path.append(file_dir)
 print("file_dir path is " + (str(sys.path.append(file_dir))))
 
 
+#  app.config['SQLALCHEMY_DATABASE_URI'] = \
+#     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    'mysql:///admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
 print(app.config)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 from models import db
+from models import Users
 
 print("Session committed")
 
