@@ -16,6 +16,7 @@ import threading
 import os
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
+import sys
 
 print("loading global variables!!")
 time.sleep(1)
@@ -34,18 +35,17 @@ print("********************************************************")
 time.sleep(1)
 
 app = Flask(__name__)
-manager = Manager(app)
-lm = LoginManager(app)
-
-csrf = CsrfProtect()
-csrf.init_app(app)
-
 app.config['SECRET_KEY'] = 'SkiCity3192!'
 app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 print("basedir is set to " + basedir)
+file_dir = os.path.dirname(__file__)
+print("file_dir path is " + file_dir)
+sys.path.append(file_dir)
+print("file_dir path is " + (str(sys.path.append(file_dir))))
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
@@ -56,6 +56,11 @@ from models import db
 
 print("Session committed")
 
+manager = Manager(app)
+lm = LoginManager(app)
+
+csrf = CsrfProtect()
+csrf.init_app(app)
 
 class LoginForm(FlaskForm):
     email = StringField('username', validators=[InputRequired(), Length(min=0, max=20)])
