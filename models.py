@@ -63,8 +63,6 @@ class Users(db.Model, UserMixin):
         return '<Users %r>' % self.email
 
 
-admin = Users('admin', 'admin@example.com')
-
 db.create_all()
 
 db.session.add(admin)
