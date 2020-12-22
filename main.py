@@ -17,6 +17,9 @@ import os
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
 import sys
+from flask_sqlalchemy import SQLAlchemy
+import pymysql
+
 
 print("loading global variables!!")
 time.sleep(1)
@@ -50,12 +53,13 @@ print("file_dir path is " + (str(sys.path.append(file_dir))))
 #  app.config['SQLALCHEMY_DATABASE_URI'] = \
 #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql:///admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
+    'mysql+pymysql://admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
 print(app.config)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 from models import db
 from models import Users
+
 
 print("Session committed")
 
@@ -106,6 +110,39 @@ error = ""
 
 exitFlag = 0
 
+def defaultadminuser(username, firstname, surname, password, role, status):
+    global db
+    global error
+    print("defaultadminuser function has been activated & its Global variables have been loaded")
+    p = Users.query.all()
+    username = ""
+    password = ""
+    firstname = ""
+    surname = ""
+    role = ""
+    status = ""
+
+    print(username)
+    print(password)
+    print(firstname)
+    print(surname)
+    print(role)
+    print(status)
+    print("Default Admin user added")
+
+#   for each in p:
+#       each.password = password
+#      each.firstname = firstname
+#       each.surname = surname
+#       each.role = role
+#        each.status = status
+
+#        hash = generate_password_hash(each.password)
+#        print(hash)
+#        each.password = hash
+#        db.session.commit()
+
+defaultadminuser("admin@test.com", "admin", "admin", "Password3192!", "ADMIN", "active")
 
 class myThread (threading.Thread):
     def __init__(self, threadID, name, counter):

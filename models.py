@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True)
     firstname = db.Column(db.String(64), unique=True)
     surname = db.Column(db.String(64), unique=True)
-    password = db.Column(db.String(64), unique=True)
+    password = db.Column(db.String(128), unique=True)
     age = db.Column(db.Integer)
     gender = db.Column(db.String(64), unique=True)
     town = db.Column(db.String(64), unique=True)
@@ -63,8 +63,7 @@ class Users(db.Model, UserMixin):
         return '<Users %r>' % self.email
 
 
-db.create_all()
-
-db.session.add(admin)
-
+# db.create_all()
 db.session.commit()
+
+
