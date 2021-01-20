@@ -14,7 +14,7 @@
 <ul >
 
       <li>
-         <h2><div id="LOGOUT"> {% if current_user.is_authenticated %} Logged in user is {{ current_user.email }} role
+         <h2><div id="LOGOUT"> {% if current_user.is_authenticated %} Logged in user is {{ current_user.email }}, role
              is {{ current_user.role }}
              <a href="/logout"> Logout </a> {% endif %} </div></h2>
 

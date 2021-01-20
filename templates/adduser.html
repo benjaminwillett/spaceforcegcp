@@ -1,107 +1,88 @@
 {%include "header.html"%}
 {% include "nav.html" %}
+<body>
 
-<form action="/submituser" method="post" xmlns="http://www.w3.org/1999/html">
+<div id="LOGIN">
+            <form name="formUserUpdate" action="/submituser" onsubmit="return confirmForm()" method="post">
 
-    <div id="NEW-USER">
-    <ul >
+                <p><h5>EMAIL/Username</h5>
+            <p><h5><input type="text" maxlength="50" name="EMAIL" value=""></h5>
+                <p><h5>Firstname</h5>
+                <p><h5><input type="text" maxlength="50" name="FIRSTNAME" value=""></h5>
+                <p><h5>Surname</h5>
+                <p><h5><input type="text" maxlength="50" name="SURNAME" value=""></h5>
+                <p><h5>Password</h5>
+                <p><h5><input type="password" maxlength="25" name="PASSWORD" value=""></h5>
+                <p><h5>Age</h5>
+                <p><h5><input type="text" maxlength="3" name="AGE" value=""></h5>
+                <p><h5>Gender</h5>
+                <p><h5><select name="GENDER">
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        </select></h5>
+                <p><h5>Town</h5>
+                <p><h5><input type="text" maxlength="50" name="TOWN" value=""></h5>
+                <p><h5>Country</h5>
+                <p><h5><input type="text" maxlength="50" name="COUNTRY" value=""></h5>
+                <p><h5>Postcode</h5>
+                <p><h5><input type="text" maxlength="50" name="POSTCODE" value=""></h5>
+                <p><h5>Role</h5>
+                <p><h5><select name="ROLE">
+                        <option value="ADMIN">Admin</option>
+                        <option value="CUSTOMER">Customer</option>
+                        </select></h5>
+                <p><h5>Status</h5>
+                <p><h5><select name="STATUS">
+                        <option value="active">active</option>
+                        <option value="inactive">inactive</option>
+                        </select></h5>
+                <p><h5></h5>
+                <p><h5><input type="submit" value="update"></h5>
 
-      <li>
-        <li>email/username: <input type="text" maxlength="50" name="EMAIL"></li>
 
-        <li>Firstname: <input type="text" maxlength="25" name="FIRSTNAME"></li>
+    </form>
+            <div id="ERROR"><p><h5>{{ ERROR }}</h5></div>
 
-        <li>Surname: <input type="text" maxlength="25" name="SURNAME"></li>
-
-        <li>Password: <input type="password" maxlength="25" name="PASSWORD"></li>
-
-        <li>Age: <input type="number" maxlength="3" name="AGE"></li>
-
-        <li>Gender:
-            <ul>
-                <li>
-                    <input type="radio" name="GENDER" value="MALE">Male<br>
-                </li>
-                <li>
-                    <input type="radio" name="GENDER" value="FEMALE">Female<br>
-                </li>
-            </ul>
-        </li>
-
-        <li>Town: <input type="text" name="TOWN"></li>
-
-        <li>Country: <select name="COUNTRY">
-            <option>Australia</option>
-            <option>UK</option>
-            <option>NZ</option>
-            <option>France</option>
-            <option>Spain</option>
-            <option>Holland</option>
-        </select></li>
-
-        <li>Postcode: <input type="text" name="POSTCODE"></li>
-
-        <li>Height: <input type="text" name="HEIGHT"></li>
-
-        <li>Weight: <input type="text" name="WEIGHT"></li>
-
-        <li>Race: <input type="text" name="RACE"></li>
-
-        <li>Children: <input type="text" name="CHILDREN"></li>
-
-        <li>Officially Diagnosed: <input type="text" name="DIAGNOSED"></li>
-
-        <li>Age when first appeared: <input type="text" name="AGESTARTED"></li>
-
-        <li>Do your parents have HHD: <input type="text" name="PARENTSHHD"></li>
-
-        <li>Number of Siblings: <input type="text" name="NUMBERSIBLINGS"></li>
-
-        <li>Number of Siblings with HHD: <input type="text" name="SIBLINGSWITHHHD"></li>
-
-        <li>Location of HHD: <input type="text" name="HHDLOCATION"></li>
-
-        <li>Doctor treating your HHD: <input type="text" name="DOCTOR"></li>
-
-        <li>Dermatologist treating HHD: <input type="text" name="DERMO"></li>
-
-        <li>Medication Tried: <input type="text" name="MEDICATIONTRIED"></li>
-
-        <li>Medication Working: <input type="text" name="MEDICATIONWORKING"></li>
-
-        <li>Tea: <input type="text" name="TEA"></li>
-
-        <li>Coffee: <input type="text" name="COFFEE"></li>
-
-        <li>Botox: <input type="text" name="BOTOX"></li>
-
-        <li>Magnesium: <input type="text" name="MAG"></li>
-
-        <li>Vitd3: <input type="text" name="VITD3"></li>
-
-        <li>Vitc: <input type="text" name="VITC"></li>
-
-        <li>VitK: <input type="text" name="VITK"></li>
-
-        <li>Probiotic: <input type="text" name="PROBIOTIC"></li>
-
-        <li>Area affected: <input type="text" name="AREA"></li>
-
-        <li>Length of breakouts: <input type="text" name="LENGTH"></li>
-
-        <li>Redlight: <input type="text" name="RED"></li>
-
-        <li>Cream: <input type="text" name="CREAM"></li>
-
-        <li>Antibiotic: <input type="text" name="ANTIBIOTIC"></li>
-
-        <li>Other Medical: <input type="text" name="OTHERMED"></li>
-
-        <input type="submit" value="Create User">
-
-        </ul>
-    </div>
-</form>
-
-{%include "footer.html"%}
+</div>
+</body>
+{% include "footer.html" %}
+<script>
+    function confirmForm() {
+        var emailVer = document.forms["formUserUpdate"]["EMAIL"].value;
+        if (emailVer == "") {
+            alert("email must be filled out");
+            return false;
+            }
+        var firstnameVer = document.forms["formUserUpdate"]["FIRSTNAME"].value;
+        if (firstnameVer == "") {
+            alert("Firstname must be filled out");
+            return false;
+            }
+        var surnameVer = document.forms["formUserUpdate"]["SURNAME"].value;
+        if (surnameVer == "") {
+            alert("Surname must be filled out");
+            return false;
+            }
+        var passwordVer = document.forms["formUserUpdate"]["PASSWORD"].value;
+        if (passwordVer == "") {
+            alert("Password must be filled out");
+            return false;
+            }
+        var ageVer = document.forms["formUserUpdate"]["AGE"].value;
+        if (ageVer == "") {
+            alert("Age must be filled out");
+            return false;
+            }
+        var genderVer = document.forms["formUserUpdate"]["GENDER"].value;
+        if (genderVer == "") {
+            alert("Gender must be filled out");
+            return false;
+            }
+        var townVer = document.forms["formUserUpdate"]["TOWN"].value;
+        if (townVer == "") {
+            alert("Town must be filled out");
+            return false;
+            }
+    }
+</script>
 

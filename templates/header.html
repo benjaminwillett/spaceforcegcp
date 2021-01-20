@@ -16,9 +16,15 @@
 <div id="header">
 
 <h1>Space Force Case File Messages:</h1>
-    {% for message in get_flashed_messages() %}
-        {{ message }}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
     {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </div>
 </body>
 

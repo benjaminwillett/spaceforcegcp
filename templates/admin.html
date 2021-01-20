@@ -20,10 +20,11 @@
 
     <ul id="UL-TITLE">
         <li id="UL-TITLE">
-            <div id="NAME-TITLE">NAME-TITLE</div>
-            <div id="IP-TITLE">IP-TITLE</div>
-            <div id="IP-TITLE">Name</div>
-            <div id="IP-TITLE">Address</div>
+            <div id="TITLE-ACTION">Action</div>
+            <div id="TITLE-USERNAME">Username</div>
+            <div id="TITLE-NAME">Name</div>
+            <div id="TITLE-ADDRESS">Address</div>
+            <div id="TITLE-STATUS">Status</div>
 
         </li>
     </ul>
@@ -34,7 +35,8 @@
       <li>
           <div id="ADMIN-EMAIL">  - {{ each.email }} </div>
           <div id="ADMIN-FIRSTNAME">  - {{ each.firstName }} {{ each.surname }} </div>
-          <div id="ADMIN-TOWN">  - {{ each.town }} {{ each.country }} {{ each.postcode }}</div>
+          <div id="ADMIN-TOWN">  - {{ each.town }} {{ each.country }} {{ each.postcode }} </div>
+          <div id="ADMIN-STATUS">  - {{ each.status }} </div>
           <div id="ADMIN-DELETE">
               <ul id="DELETE-FORM">
  <div><li>
@@ -63,21 +65,23 @@
 
     </ul>
         {% endfor %}
-    </form>
 
 </div>
 
 {%include "footer.html"%}
 {% endif %}
 
-{% if current_user.role == "USER" %}
+{% if current_user.role == "CUSTOMER" %}
 {%include "mission.html"%}
 {% endif %}
-</div>
+
 <script>
     function confirmForm() {
-        return confirm("Warning this will delete the user permanently")
-    }
+          if(!confirm("Do you really want to do this?")) {
+            return false;
+          }
+          this.form.submit();
+          }
 </script>
 
 

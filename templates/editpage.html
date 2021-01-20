@@ -5,11 +5,22 @@
 <div id="LOGIN">
             <form name="formUserUpdate" action="/update" onsubmit="return confirmForm()" method="post">
 
-            <p><h5><input type="text" maxlength="50" name="USERNAME" value="{{ USEREDIT.email }}"></h5>
+            <p><h5></h5>
+                <p><h5>EMAIL/Username</h5>
+                <p><h5><input type="text" maxlength="50" name="USERNAME" value="{{ USEREDIT.email }}"></h5>
+                <p><h5>Password</h5>
                 <p><h5><input type="password" maxlength="25" name="PASSWORD" value="{{ USEREDIT.password }}"></h5>
+                <p><h5>Town</h5>
                 <p><h5><input type="text" maxlength="50" name="TOWN" value="{{ USEREDIT.town }}"></h5>
+                <p><h5>Country</h5>
                 <p><h5><input type="text" maxlength="50" name="COUNTRY" value="{{ USEREDIT.country }}"></h5>
+                <p><h5>Postcode</h5>
                 <p><h5><input type="text" maxlength="50" name="POSTCODE" value="{{ USEREDIT.postcode }}"></h5>
+                <p><h5>Role</h5>
+                <p><h5><input type="text" maxlength="50" name="ROLE" value="{{ USEREDIT.role }}"></h5>
+                <p><h5>Status</h5>
+                <p><h5><input type="text" maxlength="50" name="ENABLEDSTATE" value="{{ USEREDIT.status }}"></h5>
+                <p><h5></h5>
                 <p><h5><input type="submit" value="update"></h5>
 
 
@@ -44,6 +55,16 @@
         var postVer = document.forms["formUserUpdate"]["POSTCODE"].value;
         if (postVer == "") {
             alert("Postcode must be filled out");
+            return false;
+            }
+        var postVer = document.forms["formUserUpdate"]["ROLE"].value;
+        if (postVer == "") {
+            alert("Role must be filled out");
+            return false;
+            }
+        var postVer = document.forms["formUserUpdate"]["ENABLEDSTATE"].value;
+        if (postVer == "") {
+            alert("Status must be filled out");
             return false;
             }
     }

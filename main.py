@@ -11,15 +11,104 @@ from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, InputRequired
-import time
 import threading
 import os
 from flask import Flask
-from werkzeug.security import generate_password_hash, check_password_hash
 import sys
 from flask_sqlalchemy import SQLAlchemy
-import pymysql
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+import time
 
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'SkiCity3192!'
+app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+     'mysql+pymysql://admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
+print(app.config)
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+time.sleep(10)
+
+db = SQLAlchemy(app)
+
+adminUsername = "admin"
+adminPassword = "Password3192!"
+adminPasswordHash = generate_password_hash(adminPassword)
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+print("basedir is set to " + basedir)
+file_dir = os.path.dirname(__file__)
+print("file_dir path is " + file_dir)
+sys.path.append(file_dir)
+print("file_dir path is " + (str(sys.path.append(file_dir))))
+
+
+class Users(db.Model, UserMixin):
+        __tablename__ = 'Users'
+        id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+        email = db.Column(db.String(64), unique=True, nullable=False)
+        firstname = db.Column(db.String(64), unique=False, nullable=False)
+        surname = db.Column(db.String(64), unique=False, nullable=False)
+        password = db.Column(db.String(128), unique=False, nullable=False)
+        age = db.Column(db.String(3), unique=False, nullable=False)
+        gender = db.Column(db.String(64), unique=False)
+        town = db.Column(db.String(64), unique=False)
+        country = db.Column(db.String(64), unique=False)
+        postcode = db.Column(db.String(64), unique=False)
+        role = db.Column(db.String(64), unique=False, nullable=False)
+        status = db.Column(db.String(64), unique=False, nullable=False)
+
+        def set_password(self, password):
+            self.password = generate_password_hash(password)
+
+        def check_password(self, password):
+            print("Self.password is ")
+            print(self.password)
+            return check_password_hash(self.password, password)
+
+        def __repr__(self):
+            print("returned result")
+            return '<Users %r>' % self.email
+
+        db.session.commit()
+
+
+def buildtable():
+    try:
+        print("trying to create table")
+        db.create_all()
+        db.session.commit()
+        print("committed DB")
+    except:
+        db.session.commit()
+        print("Could not create table")
+
+buildtable()
+
+def defaultadminsetup():
+    exists = db.session.query(Users.id).filter_by(email="admin", firstname="admin", surname="admin").scalar() is not \
+             None
+    print("this is the content of the exists variable" + (str(exists)))
+
+    try:
+        if exists is not True:
+            defaultadmin = Users(email='admin', firstname='admin', surname='admin', password=adminPasswordHash,
+                             role='ADMIN', status='active', age='0', postcode="3192", gender='male', town='weymouth',
+                             country='uk' )
+            db.session.add(defaultadmin)
+            print("Created DB Admin User")
+            db.session.commit()
+            print("Committed DB Admin User")
+
+        else:
+            print("Admin user exists in the database")
+    except:
+        pass
+
+defaultadminsetup()
 
 print("loading global variables!!")
 time.sleep(1)
@@ -37,29 +126,29 @@ print("********************************************************")
 
 time.sleep(1)
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SkiCity3192!'
-app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
-
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-print("basedir is set to " + basedir)
-file_dir = os.path.dirname(__file__)
-print("file_dir path is " + file_dir)
-sys.path.append(file_dir)
-print("file_dir path is " + (str(sys.path.append(file_dir))))
+# app = Flask(__name__)
+# app.config['SECRET_KEY'] = 'SkiCity3192!'
+# app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
+#
+#
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# print("basedir is set to " + basedir)
+# file_dir = os.path.dirname(__file__)
+# print("file_dir path is " + file_dir)
+# sys.path.append(file_dir)
+# print("file_dir path is " + (str(sys.path.append(file_dir))))
 
 
 #  app.config['SQLALCHEMY_DATABASE_URI'] = \
 #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_DATABASE_URI'] = \
-    'mysql+pymysql://admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
-print(app.config)
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = \
+#     'mysql+pymysql://admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
+# print(app.config)
+# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
-from models import db
-from models import Users
-
+# from models import db
+# from models import Users
+time.sleep(5)
 
 print("Session committed")
 
@@ -68,6 +157,7 @@ lm = LoginManager(app)
 
 csrf = CsrfProtect()
 csrf.init_app(app)
+
 
 class LoginForm(FlaskForm):
     email = StringField('username', validators=[InputRequired(), Length(min=0, max=20)])
@@ -110,39 +200,6 @@ error = ""
 
 exitFlag = 0
 
-def defaultadminuser(username, firstname, surname, password, role, status):
-    global db
-    global error
-    print("defaultadminuser function has been activated & its Global variables have been loaded")
-    p = Users.query.all()
-    username = ""
-    password = ""
-    firstname = ""
-    surname = ""
-    role = ""
-    status = ""
-
-    print(username)
-    print(password)
-    print(firstname)
-    print(surname)
-    print(role)
-    print(status)
-    print("Default Admin user added")
-
-#   for each in p:
-#       each.password = password
-#      each.firstname = firstname
-#       each.surname = surname
-#       each.role = role
-#        each.status = status
-
-#        hash = generate_password_hash(each.password)
-#        print(hash)
-#        each.password = hash
-#        db.session.commit()
-
-defaultadminuser("admin@test.com", "admin", "admin", "Password3192!", "ADMIN", "active")
 
 class myThread (threading.Thread):
     def __init__(self, threadID, name, counter):
@@ -164,15 +221,17 @@ def load_user(user_id):
 @csrf.exempt
 @app.route('/', methods=['GET', 'POST'])
 def default():
-    global error
-    error = ""
+    loginerror = None
+    if current_user.is_authenticated:
+        return redirect(url_for('admin'))
     form = LoginForm()
-    return render_template('index_two3.html', ERROR=error, form=form)
+    return render_template('index_two3.html', loginerror=loginerror, form=form)
 
 
 @csrf.exempt
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    loginerror = None
     if current_user.is_authenticated:
         return redirect(url_for('admin'))
     form = LoginForm()
@@ -193,12 +252,15 @@ def login():
         print("%s is attempting to login" % user.email)
 
         if user is None:
-            flash('Invalid Username or Password')
-            return redirect(url_for('login'))
+            print('Invalid Username')
+            loginerror = 'Invalid Username'
+            return render_template('index_two3.html', loginerror=loginerror, form=form)
 
         if user.status == "inactive":
             print("%s is an INACTIVE ACCOUNT" % user.email)
-            redirect(url_for('default'))
+            loginerror = ("%s is an INACTIVE ACCOUNT" % user.email)
+            return render_template('index_two3.html', loginerror=loginerror, form=form)
+
         else:
             login_user(user)
             flash('You are now logged in!')
@@ -346,32 +408,24 @@ def submituser():
     town = request.form['TOWN']
     country = request.form['COUNTRY']
     postcode = request.form['POSTCODE']
-    height = request.form['HEIGHT']
-    weight = request.form['WEIGHT']
-    role = "USER"
-    status = "inactive"
+    role = "CUSTOMER"
+    status = "active"
     print("Form variables populated")
 
     u = Users(email=email, firstname=firstName, surname=surname, password=password, age=age, gender=gender, town=town,
-              country=country, postcode=postcode, height=height, weight=weight, role=role, status=status)
-    #           , race=race, children=children, official_diag=diagnosed, age_first_hhd=agestarted,
-    #           parent_hhd=parentshhd, number_of_siblings=numbersiblings,
-    #           number_of_siblings_hhd=siblingswithhhd, location_hhd=hhdlocation, doctor_hhd=doctor,
-    #           dermatologist=dermo, medication_tried=medicationtried, medication_working=medicationworking,
-    #           tea=tea, coffee=coffee, botox=botox, magnesium=magnesium,
-    #           vitd3=vitd3, vitc=vitc, vitk=vitk, probiotic=probiotic, area_affected=area,
-    #           length_of_breakouts=length,
-    #           redlight=red,
-    #           cream=cream, antibiotic=antibiotic, other_medical=othermed)
+              country=country, postcode=postcode, role=role, status=status)
 
     u.set_password(password)
-
-    db.session.add(u)
-
-    db.session.commit()
-
-    return redirect(url_for("default"))
-
+    print("Inserting the following into Database Table " + (str(u)))
+    try:
+        db.session.add(u)
+        db.session.flush()
+        db.session.commit()
+        return redirect('/admin')
+    except:
+        print("Can't add a duplicate username")
+        flash("Please choose another username")
+        return render_template('adduser.html', USERNAME=current_user)
 
 @csrf.exempt
 @app.route('/update', methods=['GET', 'POST'])
@@ -386,27 +440,44 @@ def update():
         town = request.form['TOWN']
         country = request.form['COUNTRY']
         postcode = request.form['POSTCODE']
-
+        role = request.form['ROLE']
+        enabledstate = request.form['ENABLEDSTATE']
 
         print(username)
         print(password)
         print(town)
         print(country)
         print(postcode)
+        print(role)
+        print(enabledstate)
         print("user update")
 
         for each in p:
             if each.email == username:
-                each.password = password
-                each.town = town
-                each.country = country
-                each.postcode = postcode
+                if each.password != password:
+                    print(each.email + "didn't have a password match when updating so generating new password hash!!")
+                    each.set_password(password)
+                    print("New hash has been added to password database for user" + each.email)
+                    each.town = town
+                    each.country = country
+                    each.postcode = postcode
+                    each.role = role
+                    each.status = enabledstate
+                    print((str(each)) + " = Status " + (str(each.status)))
 
-                hash = generate_password_hash(each.password)
-                print(hash)
-                each.password = hash
-                db.session.commit()
-                return redirect('/admin')
+                    db.session.commit()
+                    return redirect('/admin')
+                else:
+                    print(each.email + "had a successful password match when updating so no new password generated!!")
+                    each.town = town
+                    each.country = country
+                    each.postcode = postcode
+                    each.role = role
+                    each.status = enabledstate
+                    print((str(each)) + " = Status " + (str(each.status)))
+
+                    db.session.commit()
+                    return redirect('/admin')
             else:
                 pass
 
@@ -435,24 +506,13 @@ def stats():
     for country, count in country_count:
         print(country, count)
 
-    height_count = db.session.query(Users.height, db.func.count()).group_by(Users.height).all()
-
-    for height, count in height_count:
-        print(height, count)
-
     age_count = db.session.query(Users.age, db.func.count()).group_by(Users.age).all()
 
     for age, count in age_count:
         print(age, count)
 
-    weight_count = db.session.query(Users.weight, db.func.count()).group_by(Users.weight).all()
-
-    for weight, count in weight_count:
-        print(weight, count)
-
     return render_template("stats.html", USERS=p, USERNAME=current_user, RECORDCOUNT=recordcount,
-                           GENDER_COUNT=gender_count, HEIGHT_COUNT=height_count, AGE_COUNT=age_count,
-                           WEIGHT_COUNT=weight_count,
+                           GENDER_COUNT=gender_count, AGE_COUNT=age_count,
                            COUNTRY_COUNT=country_count)
 
 

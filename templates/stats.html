@@ -32,18 +32,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
          <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h5 class="w3-text-black w3-padding-16"><i
                 class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-black"></i>
-            <b id="update6">Patient Breakdown
+            <b id="update6">Recruits Breakdown
         </b></H5>
         <H1>STATS</H1>
         <ul>
             <li>The number of registered users is {{ RECORDCOUNT }}</li>
             <li>The number of Male users is {{ MALECOUNT }}</li>
             <li>The number of Female users is {{ FEMALECOUNT }}</li>
-            <li>The number of users in height range 150 - 159 is {{ HEIGHTA }}</li>
-            <li>The number of users in height range 160 - 169 is {{ HEIGHTB }}</li>
-            <li>The number of users in height range 170 - 179 is {{ HEIGHTC }}</li>
-            <li>The number of users in height range 180 - 189 is {{ HEIGHTD }}</li>
-            <li>The number of users in height range 190+ is {{ HEIGHTE }}</li>
+
             <li>The global breakdown is:</li>
             <ul>
                 <li>UK = {{ UK }}</li>
@@ -53,7 +49,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <li>IRELAND = {{ IRELAND }}</li>
             </ul>
         </ul>
-                 <h1>HHD Sufferers Gender Chart</h1>
+                 <h1>Space Force Missions Gender Chart</h1>
     <!-- bar chart canvas element -->
     <canvas id="myChart" ></canvas>
     <p id="caption1">This chart is displaying a bar chart of gender breakdown.</p>
@@ -98,7 +94,7 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
-             <h1>HHD Sufferers Country Chart</h1>
+             <h1>Space Force Missions Country Chart</h1>
     <!-- bar chart canvas element -->
     <canvas id="myChartCountry" ></canvas>
     <p id="caption2">The chart is displaying a bar chart of country breakdown.</p>
@@ -142,56 +138,13 @@ var myChartCountry = new Chart(ctx, {
     }
 });
 </script>
-             <h1>HHD Sufferers Height Chart</h1>
-    <!-- bar chart canvas element -->
-    <canvas id="myChartHeight" ></canvas>
-    <p id="caption3">The chart is displaying a bar chart of height breakdown.</p>
 
-    <script>
-var ctx = document.getElementById("myChartHeight").getContext('2d');
-var myChartHeight = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["150-159", "160-169", "170-179", "180-189", "190 +"],
-        datasets: [{
-            label: '# Sufferers by Height',
-            data: [{{ HEIGHTA }}, {{ HEIGHTB }}, {{ HEIGHTC }}, {{ HEIGHTD }}, {{ HEIGHTE }}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>
-                          <h1>HHD Sufferers Age Chart</h1>
+                          <h1>Space Force Missions Age Chart</h1>
     <!-- bar chart canvas element -->
     <canvas id="myChartAge" ></canvas>
     <p id="caption4">The chart is displaying a bar chart of age breakdown.</p>
 
-    <script>
+             <script>
 var ctx = document.getElementById("myChartAge").getContext('2d');
 var myChartAge = new Chart(ctx, {
     type: 'bar',
@@ -230,38 +183,7 @@ var myChartAge = new Chart(ctx, {
     }
 });
 </script>
-                                       <h1>HHD Sufferers Weight Chart</h1>
-    <!-- bar chart canvas element -->
-    <canvas id="myChartWeight" ></canvas>
-    <p id="caption5">The chart is displaying a bar chart of weight breakdown.</p>
 
-    <script>
-var ctx = document.getElementById("myChartWeight").getContext('2d');
-var myChartWeight = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["10-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99", "100-109"],
-        datasets: [{
-            label: '# Sufferers by Weight',
-            data: [{{ WEIGHTA }}, {{ WEIGHTB }}, {{ WEIGHTC }}, {{ WEIGHTD }}, {{ WEIGHTE }}, {{ WEIGHTF }}, {{ WEIGHTG }}, {{ WEIGHTH }}, {{ WEIGHTI }}, {{ WEIGHTJ }}],
-            backgroundColor:
-                'rgba(255, 99, 132, 1)',
-            borderColor:
-                'rgba(255,99,132,1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>
 </div>
 </div>
 </body>
