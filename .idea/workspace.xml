@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="459b3057-ff55-49a2-a324-59bdafb0babe" name="Default" comment="added port variable to if__name__">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/assets_two/doc/Tman Street Sign Switcher.pdf" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../housepricecheltenham/Dockerfile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/message.py" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/../../housepricecheltenham/houseprice.py" afterPath="$PROJECT_DIR$/../../housepricecheltenham/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Dockerfile" afterPath="$PROJECT_DIR$/Dockerfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/haileyhailey.iml" afterPath="$PROJECT_DIR$/.idea/haileyhailey.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" afterPath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/requirements.txt" afterPath="$PROJECT_DIR$/../../housepricecheltenham/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../housepricecheltenham/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="haileyhailey.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,8 +80,8 @@
       <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.302799">
-              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.648855">
+              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -1224,8 +1217,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.302799">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.648855">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
           <folding />
         </state>
       </provider>
