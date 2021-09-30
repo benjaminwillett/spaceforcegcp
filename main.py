@@ -19,6 +19,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import time
+from message import grouponmessage
 
 
 app = Flask(__name__)
@@ -26,7 +27,8 @@ app.config['SECRET_KEY'] = 'SkiCity3192!'
 app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-     'mysql+pymysql://admin:Mysql3192!@35.244.124.207/spaceforcetestdb'
+     'mysql+pymysql://user:password@db:3306' \
+     '/spaceforcedb'
 print(app.config)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
@@ -60,6 +62,7 @@ class Users(db.Model, UserMixin):
         postcode = db.Column(db.String(64), unique=False)
         role = db.Column(db.String(64), unique=False, nullable=False)
         status = db.Column(db.String(64), unique=False, nullable=False)
+        sent_welcome_email = db.Column(db.String(64), unique=False, nullable=False)
 
         def set_password(self, password):
             self.password = generate_password_hash(password)
@@ -160,8 +163,9 @@ csrf.init_app(app)
 
 
 class LoginForm(FlaskForm):
-    email = StringField('username', validators=[InputRequired(), Length(min=0, max=20)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=0, max=20)])
+    email = StringField('username', validators=[InputRequired(), Length(min=5, max=64)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=0, max=64)])
+    loginerror = None
     print("LoginForm received Username & Password into variables")
 
     def __init__(self, *args, **kwargs):
@@ -174,9 +178,6 @@ class LoginForm(FlaskForm):
             return False
 
         user = Users.query.filter_by(email=self.email.data).first()
-        if user is None:
-            self.email.errors.append('Unknown username')
-            return False
 
         print("This is the user ")
         print(user.email)
@@ -231,6 +232,7 @@ def default():
 @csrf.exempt
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global db
     loginerror = None
     if current_user.is_authenticated:
         return redirect(url_for('admin'))
@@ -249,20 +251,33 @@ def login():
     if form.validate_on_submit():
         print("validate_on_submit activated")
         user = Users.query.filter_by(email=form.email.data).first()
-        print("%s is attempting to login" % user.email)
+        print("%s is attempting to login" % form.email.data)
+        exists = bool(Users.query.filter_by(email=form.email.data).first())
 
-        if user is None:
+        if exists is False:
             print('Invalid Username')
-            loginerror = 'Invalid Username'
+            loginerror = "Unknown account"
             return render_template('index_two3.html', loginerror=loginerror, form=form)
 
-        if user.status == "inactive":
+        elif user.status == "inactive":
             print("%s is an INACTIVE ACCOUNT" % user.email)
             loginerror = ("%s is an INACTIVE ACCOUNT" % user.email)
             return render_template('index_two3.html', loginerror=loginerror, form=form)
 
         else:
             login_user(user)
+
+            if user.email == form.email.data:
+                if user.sent_welcome_email != "SENT":
+                    mailsetup = grouponmessage(sender_email="ben.willett@distortenterprises.com",
+                                               receiver_email=user.email)
+                    user.sent_welcome_email = "SENT"
+                    db.session.flush()
+                    db.session.commit()
+
+            else:
+                pass
+
             flash('You are now logged in!')
             return redirect(url_for('admin'))
 
@@ -301,7 +316,6 @@ def adminsearch():
         print("adminsearch")
         search = request.form["USERSEARCH"]
         print(search)
-        q = Users.query.all()
 
         if search == "Search":
             p = Users.query.order_by(Users.email).all()
@@ -515,6 +529,12 @@ def stats():
                            GENDER_COUNT=gender_count, AGE_COUNT=age_count,
                            COUNTRY_COUNT=country_count)
 
+
+@app.route('/uservalue', methods=['GET', 'POST'])
+def uservalue():
+    exists = bool(Users.query.filter_by(email="ghfgf@werds.com").first())
+    print(exists)
+    return "value of exists is: " + str(exists)
 
 if __name__ == '__main__':
     manager.run()

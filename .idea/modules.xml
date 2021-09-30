@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../hackerrank/.idea/hackerrank.iml" filepath="$PROJECT_DIR$/../../hackerrank/.idea/hackerrank.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/haileyhailey.iml" filepath="$PROJECT_DIR$/.idea/haileyhailey.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../housepricecheltenham/.idea/houseprice.iml" filepath="$PROJECT_DIR$/../../housepricecheltenham/.idea/houseprice.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../spaceforce2/.idea/spaceforce2.iml" filepath="$PROJECT_DIR$/../../spaceforce2/.idea/spaceforce2.iml" />
     </modules>
   </component>

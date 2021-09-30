@@ -5,6 +5,8 @@
     <orderEntry type="jdk" jdkName="Python 2.7.10 virtualenv at ~/flasktoolenv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="spaceforce2" />
+    <orderEntry type="module" module-name="hackerrank" />
+    <orderEntry type="module" module-name="houseprice" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
