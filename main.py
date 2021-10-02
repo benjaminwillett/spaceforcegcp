@@ -23,7 +23,7 @@ from message import grouponmessage
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'SkiCity3192!'
+app.config['SECRET_KEY'] = 'Underpants3192!'
 app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \

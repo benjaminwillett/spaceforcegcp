@@ -3,6 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="459b3057-ff55-49a2-a324-59bdafb0babe" name="Default" comment="added port variable to if__name__">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../housepricecheltenham/Dockerfile" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data.db" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data.sqlite" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sqlite.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/users.xlsx" afterPath="" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/../../housepricecheltenham/houseprice.py" afterPath="$PROJECT_DIR$/../../housepricecheltenham/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" afterPath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
@@ -48,8 +55,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.139726">
-              <caret line="433" column="68" selection-start-line="433" selection-start-column="68" selection-end-line="433" selection-end-column="68" />
+            <state vertical-scroll-proportion="-3.0739727">
+              <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
               <folding>
                 <element signature="e#241#318#0" expanded="true" />
               </folding>
@@ -816,9 +823,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="33" width="1366" height="745" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24330357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24330357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5058565" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -871,13 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sqlite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -913,13 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sqlite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -952,13 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sqlite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4285715">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1089,13 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4473684">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/adduser.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1182,13 +1161,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="22.952522">
-          <caret line="508" column="58" selection-start-line="508" selection-start-column="56" selection-end-line="508" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/message.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1215,8 +1187,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.139726">
-          <caret line="433" column="68" selection-start-line="433" selection-start-column="68" selection-end-line="433" selection-end-column="68" />
+        <state vertical-scroll-proportion="-3.0739727">
+          <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
           <folding>
             <element signature="e#241#318#0" expanded="true" />
           </folding>
