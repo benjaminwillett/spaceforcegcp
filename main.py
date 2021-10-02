@@ -100,7 +100,7 @@ def defaultadminsetup():
         if exists is not True:
             defaultadmin = Users(email='admin', firstname='admin', surname='admin', password=adminPasswordHash,
                              role='ADMIN', status='active', age='0', postcode="3192", gender='male', town='weymouth',
-                             country='uk' )
+                             country='uk', sent_welcome_email="SENT")
             db.session.add(defaultadmin)
             print("Created DB Admin User")
             db.session.commit()
@@ -424,10 +424,11 @@ def submituser():
     postcode = request.form['POSTCODE']
     role = "CUSTOMER"
     status = "active"
+    sent_welcome_email = "NO"
     print("Form variables populated")
 
     u = Users(email=email, firstname=firstName, surname=surname, password=password, age=age, gender=gender, town=town,
-              country=country, postcode=postcode, role=role, status=status)
+              country=country, postcode=postcode, role=role, status=status, sent_welcome_email=sent_welcome_email)
 
     u.set_password(password)
     print("Inserting the following into Database Table " + (str(u)))
