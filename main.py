@@ -27,7 +27,7 @@ app.config['SECRET_KEY'] = 'Underpants3192!'
 app.secret_key = "afeaddsdasdjkhkjhsfkjhsdsdt5453423f32"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
-     'mysql+pymysql://user:password@db:3306' \
+     'mysql+pymysql://root:password@192.168.0.111:3306' \
      '/spaceforcedb'
 print(app.config)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
