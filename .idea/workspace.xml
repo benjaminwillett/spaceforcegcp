@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="459b3057-ff55-49a2-a324-59bdafb0babe" name="Default" comment="added port variable to if__name__">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../housepricecheltenham/Dockerfile" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test1.txt" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test2.txt" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/../../housepricecheltenham/houseprice.py" afterPath="$PROJECT_DIR$/../../housepricecheltenham/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" afterPath="$PROJECT_DIR$/../../housepricecheltenham/templates/main.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../housepricecheltenham/requirements.txt" afterPath="$PROJECT_DIR$/../../housepricecheltenham/requirements.txt" />
@@ -45,14 +45,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
               <folding>
                 <element signature="e#241#318#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test2.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test2.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1217,6 +1227,14 @@
           <folding>
             <element signature="e#241#318#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
